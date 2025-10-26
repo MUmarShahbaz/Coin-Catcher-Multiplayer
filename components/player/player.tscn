@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://b6b42cn36htxx"]
+[gd_scene load_steps=29 format=3 uid="uid://b6b42cn36htxx"]
 
 [ext_resource type="Script" uid="uid://jsfhikkn4a5v" path="res://components/player/player.gd" id="1_r55tq"]
 [ext_resource type="Texture2D" uid="uid://djcdhndtrptd5" path="res://assets/sprites/knight.png" id="1_w2g6b"]
+[ext_resource type="AudioStream" uid="uid://cmhotrf83wmr0" path="res://assets/music/time_for_adventure.mp3" id="3_mpawu"]
 [ext_resource type="AudioStream" uid="uid://cgsnsafsoh1wb" path="res://assets/sounds/jump.wav" id="4_3b4qr"]
 [ext_resource type="AudioStream" uid="uid://beudvgtvsju34" path="res://assets/sounds/hurt.wav" id="4_wa6cj"]
 
@@ -184,6 +185,10 @@ offset = Vector2(0, -5)
 
 [node name="collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_w2g6b")
+
+[node name="bg_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_mpawu")
+parameters/looping = true
 
 [node name="jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_3b4qr")

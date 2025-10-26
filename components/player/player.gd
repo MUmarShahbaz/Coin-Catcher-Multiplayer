@@ -4,6 +4,7 @@ class_name Player
 @export var SPEED = 200.0
 @export var JUMP_VELOCITY = -300.0
 @onready var sprite: AnimatedSprite2D = $sprite
+@onready var bg_music: AudioStreamPlayer = $bg_music
 @onready var jump_sfx: AudioStreamPlayer = $jump
 @onready var die_sfx: AudioStreamPlayer = $die
 
@@ -21,6 +22,7 @@ func _ready() -> void:
 		myCAM.target = self
 		add_sibling.call_deferred(myCAM)
 		cam.connect(Callable(myCAM, "set_target_offset"))
+		bg_music.play()
 
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority(): return
@@ -36,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	velocity.x = x_dir if x_dir != 0 else move_toward(velocity.x, 0, delta)
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y += JUMP_VELOCITY
-		jump_sfx.play()
+		if is_multiplayer_authority(): jump_sfx.play()
 	
 	var direction := Input.get_axis("left", "right")
 	if direction:
@@ -55,4 +57,4 @@ func _physics_process(delta: float) -> void:
 func kill():
 	global_position = Vector2(0, -80)
 	velocity = Vector2.ZERO
-	die_sfx.play()
+	if is_multiplayer_authority(): die_sfx.play()
