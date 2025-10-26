@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7rr8tbahm7jn"]
+
+[ext_resource type="Texture2D" uid="uid://ct210fur223wt" path="res://assets/sprites/coin_single.png" id="1_etdwv"]
+
+[node name="hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CoinCounter" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 137.0
+offset_bottom = 54.0
+
+[node name="icon" type="TextureRect" parent="CoinCounter"]
+layout_mode = 2
+texture = ExtResource("1_etdwv")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="count" type="Label" parent="CoinCounter"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "0"
