@@ -1,8 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7rr8tbahm7jn"]
+[gd_scene load_steps=8 format=3 uid="uid://c7rr8tbahm7jn"]
 
 [ext_resource type="Script" uid="uid://e0unoeh64twd" path="res://components/ui/hud/hud.gd" id="1_4t0t4"]
 [ext_resource type="Texture2D" uid="uid://ct210fur223wt" path="res://assets/sprites/coin_single.png" id="1_etdwv"]
+[ext_resource type="FontFile" uid="uid://dcxf0kgk2m718" path="res://assets/fonts/PixelOperator8.ttf" id="3_2twni"]
 [ext_resource type="AudioStream" uid="uid://cyey2oocu7bvd" path="res://assets/sounds/coin.wav" id="3_gwc8k"]
+[ext_resource type="FontFile" uid="uid://d1xmlatbmjlhu" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="5_kiu46"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2twni"]
+bg_color = Color(0, 0, 0, 0.498039)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gwc8k"]
+properties/0/path = NodePath(".:t")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("results:text")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="hud" type="Control"]
 layout_mode = 3
@@ -12,6 +25,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4t0t4")
+duration = 10
 
 [node name="CoinCounter" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -26,6 +40,7 @@ stretch_mode = 5
 
 [node name="count" type="Label" parent="CoinCounter"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_2twni")
 theme_override_font_sizes/font_size = 28
 text = "0"
 
@@ -43,6 +58,24 @@ offset_top = 10.0
 offset_right = -10.0
 offset_bottom = 49.0
 grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3_2twni")
 theme_override_font_sizes/font_size = 28
 text = "2:00"
 horizontal_alignment = 2
+
+[node name="results" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_kiu46")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_2twni")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_gwc8k")

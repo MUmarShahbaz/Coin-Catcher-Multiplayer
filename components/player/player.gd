@@ -12,6 +12,8 @@ class_name Player
 @export var player_id : int = 1
 var facing: int = 1
 
+var coins_collected = 0
+
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
 
