@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://dw1l3ibcmn51f"]
+
+[ext_resource type="Texture2D" uid="uid://bkasqm5el5m5p" path="res://assets/sprites/leaf.png" id="1_firwd"]
+[ext_resource type="Script" uid="uid://4ggdnv0tg12o" path="res://components/leaf/leaf.gd" id="2_6apjy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6apjy"]
+atlas = ExtResource("1_firwd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwqex"]
+atlas = ExtResource("1_firwd")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7v6ko"]
+atlas = ExtResource("1_firwd")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yd5fn"]
+atlas = ExtResource("1_firwd")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdshf"]
+atlas = ExtResource("1_firwd")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1lkg2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6apjy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwqex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7v6ko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yd5fn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdshf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="leaf" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_1lkg2")
+autoplay = "default"
+frame_progress = 0.886652
+script = ExtResource("2_6apjy")

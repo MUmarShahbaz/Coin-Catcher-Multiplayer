@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://folfx1lj5wwt"]
+
+[ext_resource type="Texture2D" uid="uid://8vn05n1rdf1y" path="res://assets/sprites/fairy.png" id="1_02kew"]
+[ext_resource type="Script" uid="uid://dtur1gl73a0bj" path="res://components/coin_fairy/coin_fairy.gd" id="1_27xoc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5of56"]
+size = Vector2(32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27xoc"]
+atlas = ExtResource("1_02kew")
+region = Rect2(384, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snc0t"]
+atlas = ExtResource("1_02kew")
+region = Rect2(448, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kym1t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27xoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snc0t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Coin Fairy" type="Area2D"]
+script = ExtResource("1_27xoc")
+base_drop_time = 0.5
+metadata/_custom_type_script = "uid://5nifywkqea36"
+
+[node name="spawn_area" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5of56")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kym1t")
+autoplay = "default"
+offset = Vector2(5, -5)
