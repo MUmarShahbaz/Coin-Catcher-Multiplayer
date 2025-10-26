@@ -25,7 +25,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4t0t4")
-duration = 10
 
 [node name="CoinCounter" type="HBoxContainer" parent="."]
 layout_mode = 0
