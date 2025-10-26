@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://jsfhikkn4a5v" path="res://components/player/player.gd" id="1_r55tq"]
 [ext_resource type="Texture2D" uid="uid://djcdhndtrptd5" path="res://assets/sprites/knight.png" id="1_w2g6b"]
-[ext_resource type="PackedScene" uid="uid://b3ykyjqmmmsao" path="res://components/controller/controller.tscn" id="2_0wgot"]
 [ext_resource type="AudioStream" uid="uid://cgsnsafsoh1wb" path="res://assets/sounds/jump.wav" id="4_3b4qr"]
+[ext_resource type="AudioStream" uid="uid://beudvgtvsju34" path="res://assets/sounds/hurt.wav" id="4_wa6cj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0wgot"]
 atlas = ExtResource("1_w2g6b")
@@ -166,8 +166,6 @@ height = 13.8
 collision_layer = 2
 script = ExtResource("1_r55tq")
 
-[node name="Controller" parent="." instance=ExtResource("2_0wgot")]
-
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fb6xp")
 offset = Vector2(0, -5)
@@ -177,3 +175,6 @@ shape = SubResource("CapsuleShape2D_w2g6b")
 
 [node name="jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_3b4qr")
+
+[node name="die" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wa6cj")
