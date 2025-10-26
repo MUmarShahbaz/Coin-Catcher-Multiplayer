@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2lcya2lgfybb"]
+
+[ext_resource type="Script" uid="uid://bq73lyxckauem" path="res://components/ui/multiplayer/multiplayer.gd" id="1_646px"]
+
+[node name="multiplayer" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_646px")
+
+[node name="Button Container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -72.0
+offset_right = 132.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Host" type="Button" parent="Button Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Host"
+
+[node name="Join" type="Button" parent="Button Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Join"
+
+[node name="Start" type="Button" parent="Button Container"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Start"
+
+[connection signal="pressed" from="Button Container/Host" to="." method="_on_host"]
+[connection signal="pressed" from="Button Container/Join" to="." method="_on_join"]
+[connection signal="pressed" from="Button Container/Start" to="." method="_on_start"]

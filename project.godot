@@ -14,6 +14,10 @@ config/name="Coin Catcher Multiplayer"
 run/main_scene="uid://u7ewko4cpsc"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
+[autoload]
+
+MultiplayerManager="*res://multiplayer_manager.gd"
+
 [display]
 
 window/size/always_on_top=true

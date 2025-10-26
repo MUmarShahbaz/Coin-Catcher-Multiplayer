@@ -22,3 +22,4 @@ func spawn():
 	var new_element: Node = element.instantiate()
 	new_element.global_position = local_pos + global_position
 	add_sibling(new_element)
+	return new_element

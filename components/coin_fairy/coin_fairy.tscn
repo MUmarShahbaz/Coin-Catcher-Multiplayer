@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://folfx1lj5wwt"]
+[gd_scene load_steps=8 format=3 uid="uid://folfx1lj5wwt"]
 
 [ext_resource type="Texture2D" uid="uid://8vn05n1rdf1y" path="res://assets/sprites/fairy.png" id="1_02kew"]
 [ext_resource type="Script" uid="uid://dtur1gl73a0bj" path="res://components/coin_fairy/coin_fairy.gd" id="1_27xoc"]
@@ -28,6 +28,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_27xoc"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:started")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Coin Fairy" type="Area2D"]
 script = ExtResource("1_27xoc")
 base_drop_time = 0.5
@@ -40,3 +48,6 @@ shape = SubResource("RectangleShape2D_5of56")
 sprite_frames = SubResource("SpriteFrames_kym1t")
 autoplay = "default"
 offset = Vector2(5, -5)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_27xoc")

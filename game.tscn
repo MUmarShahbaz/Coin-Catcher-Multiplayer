@@ -1,19 +1,18 @@
-[gd_scene load_steps=20 format=4 uid="uid://u7ewko4cpsc"]
+[gd_scene load_steps=19 format=4 uid="uid://u7ewko4cpsc"]
 
 [ext_resource type="Texture2D" uid="uid://dniyjq11bvnnx" path="res://assets/bg/Plan-5.png" id="1_7jktm"]
 [ext_resource type="Texture2D" uid="uid://h6kigitqohcb" path="res://assets/sprites/world_tileset.png" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://5nifywkqea36" path="res://components/spawner/spawner.gd" id="1_215e1"]
 [ext_resource type="PackedScene" uid="uid://c1nvkiww3kjgd" path="res://components/killzone/killzone.tscn" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://b6b42cn36htxx" path="res://components/player/player.tscn" id="2_e2o6t"]
 [ext_resource type="Texture2D" uid="uid://dykwixnj40p1i" path="res://assets/bg/Plan-4.png" id="2_eow3j"]
 [ext_resource type="Texture2D" uid="uid://dmqceo70wmcsl" path="res://assets/bg/Plan-3.png" id="3_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://c7rr8tbahm7jn" path="res://components/ui/hud/hud.tscn" id="4_fc0e3"]
 [ext_resource type="Texture2D" uid="uid://crp1p4sux8qom" path="res://assets/bg/Plan-2.png" id="5_vef74"]
 [ext_resource type="Texture2D" uid="uid://djg2auqirtul" path="res://assets/bg/Plan-1.png" id="6_hve3p"]
-[ext_resource type="Script" uid="uid://df8x0jsjhkspk" path="res://components/controller/controller.gd" id="8_hve3p"]
 [ext_resource type="PackedScene" uid="uid://dw1l3ibcmn51f" path="res://components/leaf/leaf.tscn" id="11_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://folfx1lj5wwt" path="res://components/coin_fairy/coin_fairy.tscn" id="13_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://vdmb8gpvg05c" path="res://components/coin/coin.tscn" id="14_215e1"]
+[ext_resource type="PackedScene" uid="uid://d2lcya2lgfybb" path="res://components/ui/multiplayer/multiplayer.tscn" id="15_7sc4i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iotsf"]
 size = Vector2(6238, 53)
@@ -67,18 +66,20 @@ size = Vector2(94, 10)
 [node name="Game" type="Node2D"]
 
 [node name="Leaf Spawner" type="Area2D" parent="."]
+position = Vector2(2406, -344.5)
 script = ExtResource("1_215e1")
 element = ExtResource("11_mfdv2")
 base_drop_time = 0.001
 metadata/_custom_type_script = "uid://5nifywkqea36"
 
 [node name="spawn_area" type="CollisionShape2D" parent="Leaf Spawner"]
-position = Vector2(2406, -344.5)
 shape = SubResource("RectangleShape2D_iotsf")
 
 [node name="ui" type="CanvasLayer" parent="."]
 
 [node name="hud" parent="ui" instance=ExtResource("4_fc0e3")]
+
+[node name="multiplayer" parent="ui" instance=ExtResource("15_7sc4i")]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="ui"]
 
@@ -153,16 +154,17 @@ shape = SubResource("WorldBoundaryShape2D_fc0e3")
 position = Vector2(1392, 58)
 shape = SubResource("RectangleShape2D_hve3p")
 
-[node name="Player1" parent="." instance=ExtResource("2_e2o6t")]
-z_index = 1
-position = Vector2(0, -80)
-
-[node name="Controller" type="Node" parent="Player1"]
-script = ExtResource("8_hve3p")
-metadata/_custom_type_script = "uid://df8x0jsjhkspk"
-
 [node name="Coins" type="Node2D" parent="."]
 
-[node name="Coin Fairy" parent="Coins" instance=ExtResource("13_lc2xo")]
+[node name="Coin Fairy" parent="Coins" node_paths=PackedStringArray("HUD") instance=ExtResource("13_lc2xo")]
 position = Vector2(65, -162)
+HUD = NodePath("../../ui/hud")
 element = ExtResource("14_215e1")
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://b6b42cn36htxx")
+spawn_path = NodePath("../Players")
+
+[connection signal="started" from="ui/multiplayer" to="Coins/Coin Fairy" method="start"]

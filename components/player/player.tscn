@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b6b42cn36htxx"]
+[gd_scene load_steps=28 format=3 uid="uid://b6b42cn36htxx"]
 
 [ext_resource type="Script" uid="uid://jsfhikkn4a5v" path="res://components/player/player.gd" id="1_r55tq"]
 [ext_resource type="Texture2D" uid="uid://djcdhndtrptd5" path="res://assets/sprites/knight.png" id="1_w2g6b"]
@@ -162,12 +162,24 @@ animations = [{
 radius = 4.0
 height = 13.8
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mpawu"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("sprite:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("sprite:flip_h")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_r55tq")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fb6xp")
+autoplay = "default"
 offset = Vector2(0, -5)
 
 [node name="collider" type="CollisionShape2D" parent="."]
@@ -178,3 +190,6 @@ stream = ExtResource("4_3b4qr")
 
 [node name="die" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wa6cj")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mpawu")
