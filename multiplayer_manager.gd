@@ -2,6 +2,7 @@ extends Node
 
 var player_scene : PackedScene = preload("res://components/player/player.tscn")
 var spawn_root : Node2D
+@onready var GameManager = get_tree().get_current_scene().get_node("GameManager")
 
 var port = 8080
 var ip = "127.0.0.1"
@@ -18,9 +19,10 @@ func host():
 	add_player(1)
 
 func join():
-	var client_peer = ENetMultiplayerPeer.new()
-	client_peer.create_client(ip, port)
-	multiplayer.multiplayer_peer = client_peer
+	if not GameManager.started:
+		var client_peer = ENetMultiplayerPeer.new()
+		client_peer.create_client(ip, port)
+		multiplayer.multiplayer_peer = client_peer
 
 func add_player(id : int):
 	var new_player : Player = player_scene.instantiate()

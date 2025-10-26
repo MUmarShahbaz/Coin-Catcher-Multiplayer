@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=4 uid="uid://u7ewko4cpsc"]
+[gd_scene load_steps=21 format=4 uid="uid://u7ewko4cpsc"]
 
 [ext_resource type="Texture2D" uid="uid://dniyjq11bvnnx" path="res://assets/bg/Plan-5.png" id="1_7jktm"]
+[ext_resource type="Script" uid="uid://d08oli0tygt12" path="res://game_manager.gd" id="1_7sc4i"]
 [ext_resource type="Texture2D" uid="uid://h6kigitqohcb" path="res://assets/sprites/world_tileset.png" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://5nifywkqea36" path="res://components/spawner/spawner.gd" id="1_215e1"]
 [ext_resource type="PackedScene" uid="uid://c1nvkiww3kjgd" path="res://components/killzone/killzone.tscn" id="1_fc0e3"]
@@ -13,6 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://folfx1lj5wwt" path="res://components/coin_fairy/coin_fairy.tscn" id="13_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://vdmb8gpvg05c" path="res://components/coin/coin.tscn" id="14_215e1"]
 [ext_resource type="PackedScene" uid="uid://d2lcya2lgfybb" path="res://components/ui/multiplayer/multiplayer.tscn" id="15_7sc4i"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_215e1"]
+properties/0/path = NodePath(".:started")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iotsf"]
 size = Vector2(6238, 53)
@@ -65,6 +71,15 @@ size = Vector2(94, 10)
 
 [node name="Game" type="Node2D"]
 
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_7sc4i")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="GameManager"]
+replication_config = SubResource("SceneReplicationConfig_215e1")
+
+[node name="temp_cam" type="Camera2D" parent="."]
+zoom = Vector2(3.5, 3.5)
+
 [node name="Leaf Spawner" type="Area2D" parent="."]
 position = Vector2(2406, -344.5)
 script = ExtResource("1_215e1")
@@ -79,7 +94,7 @@ shape = SubResource("RectangleShape2D_iotsf")
 
 [node name="hud" parent="ui" instance=ExtResource("4_fc0e3")]
 
-[node name="multiplayer" parent="ui" instance=ExtResource("15_7sc4i")]
+[node name="join_game" parent="ui" instance=ExtResource("15_7sc4i")]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="ui"]
 
@@ -166,5 +181,3 @@ element = ExtResource("14_215e1")
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://b6b42cn36htxx")
 spawn_path = NodePath("../Players")
-
-[connection signal="started" from="ui/multiplayer" to="Coins/Coin Fairy" method="start"]

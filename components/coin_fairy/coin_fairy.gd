@@ -1,18 +1,15 @@
 extends Spawner
 class_name CoinFairy
 
+@onready var GameManager = get_tree().get_current_scene().get_node("GameManager")
 @export var Speed: float = 50
 @export var HUD: Control
-@export var started: bool = false
 
 func _process(delta: float) -> void:
-	if not started: return
+	if not GameManager.started: return
 	if multiplayer.is_server():
 		super._process(delta)
 	global_position.x += Speed*delta
-
-func start():
-	started = true
 
 func spawn():
 	var coin:Coin = super.spawn()

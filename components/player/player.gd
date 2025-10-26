@@ -7,6 +7,7 @@ class_name Player
 @onready var bg_music: AudioStreamPlayer = $bg_music
 @onready var jump_sfx: AudioStreamPlayer = $jump
 @onready var die_sfx: AudioStreamPlayer = $die
+@onready var GameManager = get_tree().get_current_scene().get_node("GameManager")
 
 @export var player_id : int = 1
 var facing: int = 1
@@ -25,7 +26,7 @@ func _ready() -> void:
 		bg_music.play()
 
 func _physics_process(delta: float) -> void:
-	if not is_multiplayer_authority(): return
+	if not is_multiplayer_authority() or not GameManager.started: return
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
