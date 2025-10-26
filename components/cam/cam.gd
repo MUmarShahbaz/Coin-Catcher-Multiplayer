@@ -1,13 +1,16 @@
 extends Camera2D
 class_name CAM
 
-@onready var target: CharacterBody2D = get_parent()
-@export var smoothing: float = 0.1
+var target: CharacterBody2D
+@export var smoothing: float = 0.5
 @export var offset_distance: Vector2 = Vector2(120, 60)
 var target_offset: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	zoom = Vector2.ONE * 3.5
+	limit_bottom = 250
+	limit_smoothed = true
+	position_smoothing_enabled = true
 
 func _process(_delta: float) -> void:
 	var cam_off: Vector2 = Vector2.ZERO

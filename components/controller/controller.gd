@@ -7,7 +7,8 @@ signal cam(dir: Vector2)
 
 func _ready() -> void:
 	var myCAM = CAM.new()
-	add_sibling.call_deferred(myCAM)
+	myCAM.target = player
+	player.add_sibling.call_deferred(myCAM)
 	cam.connect(Callable(myCAM, "set_target_offset"))
 
 func _physics_process(delta: float) -> void:
