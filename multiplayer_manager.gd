@@ -40,6 +40,6 @@ func del_player(id : int):
 
 func get_local_ip() -> String:
 	for addr in IP.get_local_addresses():
-		if addr.begins_with("192.168.") or addr.begins_with("10.") or addr.begins_with("172."):
+		if addr.begins_with("192.168."):
 			return addr
-	return "127.0.0.1"
+	return "Could not identify local IP address.\nTry manually checking your router?"

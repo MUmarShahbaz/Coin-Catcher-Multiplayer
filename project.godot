@@ -11,8 +11,11 @@ config_version=5
 [application]
 
 config/name="Coin Catcher Multiplayer"
+config/description="LAN Cross-Platform Multiplayer. Catch the most coins in 120 seconds to win!!! Play against friends on the same network!"
+config/version="1"
 run/main_scene="uid://u7ewko4cpsc"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+config/icon="uid://cui62scud1hc0"
 
 [autoload]
 
