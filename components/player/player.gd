@@ -9,15 +9,13 @@ class_name Player
 @onready var die_sfx: AudioStreamPlayer = $die
 @onready var GameManager = get_tree().get_current_scene().get_node("GameManager")
 
-@export var player_id : int = 1
 var facing: int = 1
-
 var coins_collected = 0
 
-func _enter_tree() -> void:
-	set_multiplayer_authority(name.to_int())
-
 signal cam(dir: Vector2)
+
+func _enter_tree() -> void:
+	set_multiplayer_authority(int(name))
 
 func _ready() -> void:
 	if is_multiplayer_authority():
@@ -28,10 +26,12 @@ func _ready() -> void:
 		bg_music.play()
 
 func _physics_process(delta: float) -> void:
-	if not is_multiplayer_authority() or not GameManager.started: return
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	
+	if is_multiplayer_authority() and GameManager.started: control(delta)
+	move_and_slide()
+
+func control(delta):
 	var cam_offset := Vector2.ZERO
 	cam_offset.x = Input.get_axis("cam_left", "cam_right")
 	cam_offset.y = Input.get_axis("cam_up", "cam_down")
@@ -54,8 +54,6 @@ func _physics_process(delta: float) -> void:
 	if facing * direction < 0:
 		sprite.flip_h = !sprite.flip_h
 		facing *= -1
-	
-	move_and_slide()
 
 func kill():
 	global_position = Vector2(0, -80)

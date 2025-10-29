@@ -4,8 +4,9 @@ extends Control
 
 @onready var coin_count : Label = $CoinCounter/count
 @onready var time: Label = $time
-@onready var coin_sfx : AudioStreamPlayer = $coin
 @onready var results_label : Label = $results
+@onready var id_label : Label = $id
+@onready var coin_sfx : AudioStreamPlayer = $coin
 @onready var GameManager = get_tree().get_current_scene().get_node("GameManager")
 @onready var players_root = get_tree().get_current_scene().get_node("Players")
 
@@ -23,8 +24,11 @@ func _ready() -> void:
 	t = duration
 	end.connect(Callable(GameManager, "end_game"))
 	GameManager.display.connect(Callable(self, "results"))
+	id_label.text = "Connecting"
 
 func _process(delta: float) -> void:
+	if id_label.text == "Connecting" and GameManager.get_player_num():
+		id_label.text = str(GameManager.get_player_num())
 	if not GameManager.started: return
 	t -= delta
 	time.text = formatted_time(t)

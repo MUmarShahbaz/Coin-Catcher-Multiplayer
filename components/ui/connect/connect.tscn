@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://d2lcya2lgfybb"]
 
-[ext_resource type="Script" uid="uid://bq73lyxckauem" path="res://components/ui/multiplayer/multiplayer.gd" id="1_646px"]
+[ext_resource type="Script" uid="uid://bq73lyxckauem" path="res://components/ui/connect/connect.gd" id="1_646px"]
 
-[node name="multiplayer" type="Control"]
+[node name="connect" type="Control"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -33,10 +33,26 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Host"
 
+[node name="Address_Input" type="TextEdit" parent="Button Container"]
+custom_minimum_size = Vector2(350, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Host Address to Join"
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+
 [node name="Join" type="Button" parent="Button Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Join"
+
+[node name="Address_Output" type="Label" parent="Button Container"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Start" type="Button" parent="Button Container"]
 visible = false
